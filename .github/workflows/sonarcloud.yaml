@@ -44,7 +44,7 @@ jobs:
         uses: sonarsource/sonarcloud-github-action@v2
         with:
           args: >
-            -Dsonar.projectKey=application-avalanches-pagamento-ms
+            -Dsonar.projectKey=POSTECH-SOAT-SALA11_application-avalanches-pagamento-ms
             -Dsonar.organization=postech-soat-sala11
             -Dsonar.java.binaries=target
             -Dsonar.junit.reportPaths=target/surefire-reports
