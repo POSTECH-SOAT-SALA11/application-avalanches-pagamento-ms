@@ -55,8 +55,8 @@ jobs:
       - name: Build and Analyze with SonarQube
         env:
           SONAR_HOST_URL: http://localhost:9000
-          SONAR_LOGIN: admin
-          SONAR_PASSWORD: admin
+          SONAR_LOGIN: ${{ secrets.SONAR_LOGIN }}
+          SONAR_PASSWORD: ${{ secrets.SONAR_PASSWORD }}
         run: |
           mvn clean install sonar:sonar \
             -Dsonar.projectKey=avalanches \
