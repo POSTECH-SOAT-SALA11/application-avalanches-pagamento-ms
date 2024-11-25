@@ -1,44 +1,37 @@
-name: Build Application
-
-# Dispara o workflow em todos os commits em qualquer branch
+name: SonarQube Cloud
 on:
   push:
     branches:
-      - '**' # Para todas as branches
-  pull_request: # Também em pull requests
-    branches:
-      - '**'
-
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
 jobs:
   build:
-    name: Build with Maven
-    runs-on: ubuntu-latest # Sistema operacional do runner
-
+    name: Build and analyze
+    runs-on: ubuntu-latest
     steps:
-      # Passo 1: Checa o código do repositório
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # Passo 2: Configura o JDK necessário
-      - name: Set up JDK 21
-        uses: actions/setup-java@v3
+      - uses: actions/checkout@v4
         with:
-          java-version: 21 # Versão do JDK
-          distribution: temurin # Distribuição do JDK (Eclipse Temurin)
-
-      # Passo 3: Configura o cache para dependências Maven
-      - name: Cache Maven dependencies
-        uses: actions/cache@v3
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
         with:
-          path: ~/.m2/repository # Caminho do cache do Maven
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }} # Identificador do cache
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
-      # Passo 4: Executa o build com Maven
-      - name: Build with Maven
-        run: mvn clean install -DskipTests
-
-      # Passo 5: (Opcional) Testa o build final (se você quiser adicionar testes)
-      - name: Run Tests
-        run: mvn test
+          java-version: 17
+          distribution: 'zulu' # Alternative distribution options are available.
+      - name: Cache SonarQube Cloud packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=POSTECH-SOAT-SALA11_application-avalanches-pagamento-ms
