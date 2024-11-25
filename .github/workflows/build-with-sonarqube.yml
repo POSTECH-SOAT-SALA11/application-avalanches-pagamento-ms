@@ -10,6 +10,7 @@ on:
 
 jobs:
   build:
+    environment: production
     name: Build and Analyze Code with SonarQube
     runs-on: ubuntu-latest
 
