@@ -55,12 +55,14 @@ jobs:
       - name: Build and Analyze with SonarQube
         env:
           SONAR_HOST_URL: http://localhost:9000
-          SONAR_TOKEN: admin # Ajuste aqui se criar outro usuário ou token
+          SONAR_LOGIN: admin
+          SONAR_PASSWORD: admin
         run: |
           mvn clean install sonar:sonar \
             -Dsonar.projectKey=avalanches \
             -Dsonar.host.url=$SONAR_HOST_URL \
-            -Dsonar.login=$SONAR_TOKEN
+            -Dsonar.login=$SONAR_LOGIN \
+            -Dsonar.password=$SONAR_PASSWORD
 
       # Passo 6: Parar o contêiner do SonarQube
       - name: Stop SonarQube
