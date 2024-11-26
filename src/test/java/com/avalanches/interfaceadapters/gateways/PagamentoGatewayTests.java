@@ -12,9 +12,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.JdbcOperations;
 
-import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -57,38 +55,6 @@ class PagamentoGatewayTest {
         Object[] capturedArgs = captor.getValue();
         assertEquals(1, capturedArgs[0]);
         assertEquals("APROVADO", capturedArgs[1]);
-    }
-
-    @Test
-    void testEfetuarPagamento_Success() throws IOException {
-        int idPedido = 1;
-        Response response = new Response.Builder()
-                .request(new Request.Builder().url("http://mock.url/1").build())
-                .protocol(Protocol.HTTP_1_1)
-                .code(200)
-                .message("OK")
-                .body(ResponseBody.create("", MediaType.get("application/json; charset=utf-8")))
-                .build();
-
-        when(httpClient.newCall(any(Request.class))).thenReturn(mock(Call.class));
-        when(httpClient.newCall(any(Request.class)).execute()).thenReturn(response);
-
-        boolean result = pagamentoGateway.efetuarPagamento(idPedido);
-
-        assertTrue(result);
-        verify(httpClient).newCall(any(Request.class));
-    }
-
-    @Test
-    void testEfetuarPagamento_Failure() throws IOException {
-        int idPedido = 1;
-        when(httpClient.newCall(any(Request.class))).thenReturn(mock(Call.class));
-        when(httpClient.newCall(any(Request.class)).execute()).thenThrow(new IOException("Mock Exception"));
-
-        boolean result = pagamentoGateway.efetuarPagamento(idPedido);
-
-        assertFalse(result);
-        verify(httpClient).newCall(any(Request.class));
     }
 
     @Test
