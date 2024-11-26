@@ -35,7 +35,7 @@ public class PagamentoGateway implements PagamentoGatewayInterface {
 
     @Override
     public Boolean efetuarPagamento(Integer idPedido) {
-        String url = webHookMockParams.BaseUrl + idPedido;
+        String url = webHookMockParams.getBaseUrl() + idPedido;
         MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
         RequestBody body = RequestBody.create("", JSON);
@@ -45,7 +45,7 @@ public class PagamentoGateway implements PagamentoGatewayInterface {
                 .post(body)
                 .build();
 
-        try (Response response = webHookMockParams.httpClient.newCall(request).execute()) {
+        try (Response response = webHookMockParams.getHttpClient().newCall(request).execute()) {
             return response.isSuccessful();
         } catch (IOException e) {
             e.printStackTrace();
