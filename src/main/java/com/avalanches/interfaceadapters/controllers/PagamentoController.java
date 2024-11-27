@@ -13,16 +13,27 @@ public class PagamentoController implements PagamentoControllerInterface {
 
     @Override
     public void webhook(WebhookParams webhook, BancoDeDadosContextoInterface bancoDeDadosContexto, WebHookMockParams webHookMockParams) {
-        PagamentoGatewayInterface pagamentoGateway = new PagamentoGateway(bancoDeDadosContexto, webHookMockParams);
-        PagamentoUseCase pagamentoUseCase = new PagamentoUseCase();
+        PagamentoGatewayInterface pagamentoGateway = createPagamentoGateway(bancoDeDadosContexto, webHookMockParams);
+        PagamentoUseCase pagamentoUseCase = createPagamentoUseCase(); // Call the method that creates PagamentoUseCase
         pagamentoUseCase.cadastrar(webhook, pagamentoGateway);
     }
 
     @Override
     public StatusPagamento consultaStatus(Integer idPedido, BancoDeDadosContextoInterface bancoDeDadosContexto, WebHookMockParams webHookMockParams) {
-        PagamentoGatewayInterface pagamentoGateway = new PagamentoGateway(bancoDeDadosContexto, webHookMockParams);
-        PagamentoUseCase pagamentoUseCase = new PagamentoUseCase();
+        PagamentoGatewayInterface pagamentoGateway = createPagamentoGateway(bancoDeDadosContexto, webHookMockParams);
+        PagamentoUseCase pagamentoUseCase = createPagamentoUseCase();
         return pagamentoUseCase.consultaStatus(idPedido, pagamentoGateway);
+    }
+
+    protected PagamentoGateway createPagamentoGateway(
+            BancoDeDadosContextoInterface bancoDeDadosContexto,
+            WebHookMockParams webHookMockParams
+    ) {
+        return new PagamentoGateway(bancoDeDadosContexto, webHookMockParams);
+    }
+
+    protected PagamentoUseCase createPagamentoUseCase() {
+        return new PagamentoUseCase();
     }
 
 }
