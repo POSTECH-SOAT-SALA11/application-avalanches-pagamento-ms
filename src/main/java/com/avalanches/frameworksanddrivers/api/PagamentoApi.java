@@ -10,6 +10,7 @@ import com.avalanches.interfaceadapters.controllers.interfaces.PagamentoControll
 import com.avalanches.interfaceadapters.presenters.dtos.WebHookDto;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -29,7 +30,7 @@ public class PagamentoApi implements PagamentoApiInterface {
         try {
             System.out.println("Payload recebido: idPedido=" + webhook.idPedido() + ", status=" + webhook.status());
             WebHookMockParams webHookMockParams = new WebHookMockParams();
-            PagamentoController pagamentoController = new PagamentoController();
+            PagamentoController pagamentoController = createPagamentoController();
             pagamentoController.webhook(webhook, bancoDeDadosContexto, webHookMockParams);
             return ResponseEntity.ok(new WebHookDto(true, "Webhook recebido com sucesso"));
 
@@ -38,6 +39,10 @@ public class PagamentoApi implements PagamentoApiInterface {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new WebHookDto(false, "Ocorreu um erro ao processar o webhook"));
         }
+    }
+
+    protected PagamentoController createPagamentoController() {
+        return new PagamentoController();
     }
 
     @GetMapping("/status/{idPedido}")
