@@ -47,8 +47,7 @@ public class PagamentoGateway implements PagamentoGatewayInterface {
 
         try (Response response = webHookMockParams.getHttpClient().newCall(request).execute()) {
             return response.isSuccessful();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
             return false;
         }
     }

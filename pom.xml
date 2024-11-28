@@ -80,6 +80,12 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -94,7 +100,6 @@
                 <version>0.8.10</version>
                 <configuration>
                     <excludes>
-                        <exclude>com/avalanches/enterprisebusinessrules/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

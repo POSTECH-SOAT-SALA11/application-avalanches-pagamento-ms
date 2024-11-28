@@ -14,6 +14,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -120,6 +122,83 @@ class PagamentoGatewayTest {
 
         // Verifying that the method throws the expected exception
         assertThrows(EmptyResultDataAccessException.class, () -> pagamentoGateway.verificaPagamentoExiste(idPedido));
+    }
+
+    @Test
+    void testEfetuarPagamento_Success() throws Exception {
+        int idPedido = 123;
+
+        // Mocking the HTTP response
+        Response mockResponse = new Response.Builder()
+                .request(new Request.Builder().url("http://mock.url/" + idPedido).build())
+                .protocol(Protocol.HTTP_1_1)
+                .code(200) // HTTP 200 OK
+                .message("OK")
+                .body(ResponseBody.create("", MediaType.get("application/json; charset=utf-8")))
+                .build();
+
+        when(httpClient.newCall(any(Request.class))).thenAnswer(invocation -> {
+            Request request = invocation.getArgument(0);
+
+            // Verify URL is constructed correctly
+            assertEquals("http://mock.url/" + idPedido, request.url().toString());
+
+            // Verify HTTP method is POST
+            assertEquals("POST", request.method());
+
+            return mock(Call.class, invocationOnMock -> mockResponse);
+        });
+
+        // Call the method under test
+        Boolean result = pagamentoGateway.efetuarPagamento(idPedido);
+
+        // Assertions
+        assertTrue(result);
+        verify(httpClient).newCall(any(Request.class)); // Ensure the HTTP client was called
+    }
+
+    @Test
+    void testEfetuarPagamento_Failure() throws Exception {
+        int idPedido = 123;
+
+        // Mocking the HTTP response with a failure status code
+        Response mockResponse = new Response.Builder()
+                .request(new Request.Builder().url("http://mock.url/" + idPedido).build())
+                .protocol(Protocol.HTTP_1_1)
+                .code(500) // HTTP 500 Internal Server Error
+                .message("Internal Server Error")
+                .body(ResponseBody.create("", MediaType.get("application/json; charset=utf-8")))
+                .build();
+
+        when(httpClient.newCall(any(Request.class))).thenAnswer(invocation -> mock(Call.class, invocationOnMock -> mockResponse));
+
+        // Call the method under test
+        Boolean result = pagamentoGateway.efetuarPagamento(idPedido);
+
+        // Assertions
+        assertFalse(result);
+        verify(httpClient).newCall(any(Request.class)); // Ensure the HTTP client was called
+    }
+
+    @Test
+    void testEfetuarPagamento_Exception() throws Exception {
+        int idPedido = 123;
+
+        // Mocking the Call object
+        Call mockCall = mock(Call.class);
+
+        // Configuring the mock Call to throw an IOException on execute()
+        when(mockCall.execute()).thenThrow(new IOException("Network error"));
+
+        // Mocking the OkHttpClient to return the mock Call
+        when(httpClient.newCall(any(Request.class))).thenReturn(mockCall);
+
+        // Call the method under test
+        Boolean result = pagamentoGateway.efetuarPagamento(idPedido);
+
+        // Assertions
+        assertFalse(result); // Should return false when an exception occurs
+        verify(httpClient).newCall(any(Request.class)); // Ensure the HTTP client was called
     }
 
 }
