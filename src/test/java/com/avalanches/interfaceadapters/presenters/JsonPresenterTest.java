@@ -40,12 +40,29 @@ class JsonPresenterTest {
         JsonPresenter mockPresenter = mock(JsonPresenter.class);
         try {
             when(mockPresenter.serialize(person)).thenThrow(new JsonMappingCustomException("Mapping error"));
-        } catch (JsonProcessingCustomException | JsonMappingCustomException e) {
+        } catch (JsonMappingCustomException e) {
             fail("Unexpected exception: " + e.getMessage());
         }
 
         // Act & Assert
         assertThrows(JsonMappingCustomException.class, () -> mockPresenter.serialize(person));
+    }
+
+    @Test
+    void testSerialize_ThrowsJsonProcessingCustomException() {
+        // Arrange
+        Person person = new Person("John", 30);
+
+        // Simulate a JsonMappingException during serialization
+        JsonPresenter mockPresenter = mock(JsonPresenter.class);
+        try {
+            when(mockPresenter.serialize(person)).thenThrow(new JsonProcessingCustomException("Mapping error"));
+        } catch (JsonProcessingCustomException e) {
+            fail("Unexpected exception: " + e.getMessage());
+        }
+
+        // Act & Assert
+        assertThrows(JsonProcessingCustomException.class, () -> mockPresenter.serialize(person));
     }
 
     @Test
@@ -76,7 +93,7 @@ class JsonPresenterTest {
         }
 
         // Act & Assert
-        assertThrows(JsonMappingCustomException.class, () -> jsonPresenter.deserialize(invalidJson, Person.class));
+        assertThrows(JsonMappingCustomException.class, () -> mockPresenter.deserialize(invalidJson, Person.class));
     }
 
     // Person class to be used in the test
