@@ -8,10 +8,10 @@
         <version>3.2.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.avalanches</groupId>
-    <artifactId>avalanches-pagamento</artifactId>
+    <groupId>com.avalanches_pagamento</groupId>
+    <artifactId>avalanches_pagamento</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>avalanches-pagamento</name>
+    <name>avalanches_pagamento</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>18</java.version>
