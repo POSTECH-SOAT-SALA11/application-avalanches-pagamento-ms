@@ -39,11 +39,22 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_PASSWORD: redis_password
+      PAGAMENTO_WEBHOOK_URL: http://pagamento-mock-service:5001/pagamento/
+      PAGAMENTO_WEBHOOK_URL_2: http://sistema-pagamentos-mock-service:5001/pagamento/
     ports:
       - "8282:8282"
     depends_on:
       - postgres
       - redis
+    networks:
+      - avalanches-network
+
+  pagamento-mock-service:
+    build:
+      context: ./mock/application-avalanches-pagamento-externo-ms  # Add the correct relative path to the directory containing the Dockerfile
+    container_name: pagamento-mock-service
+    ports:
+      - "5001:5001"  # Expose port 5001
     networks:
       - avalanches-network
 

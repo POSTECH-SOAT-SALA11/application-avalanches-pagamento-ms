@@ -12,20 +12,10 @@ public class WebHookMockParams {
     @Autowired
     protected Environment ambiente;
 
-    private String baseUrl;
     private final OkHttpClient httpClient = new OkHttpClient();
 
-    @PostConstruct
-    protected void init() {
-        // Retrieve the property and throw an exception if it is not found
-        baseUrl = ambiente.getProperty("pagamento.webhook.url");
-        if (baseUrl == null || baseUrl.isEmpty()) {
-            throw new IllegalArgumentException("Property 'pagamento.webhook.url' is not defined in the environment or configuration file.");
-        }
-    }
-
     public String getBaseUrl() {
-        return baseUrl;
+        return ambiente.getProperty("pagamento.webhook.url");
     }
 
     public OkHttpClient getHttpClient() {

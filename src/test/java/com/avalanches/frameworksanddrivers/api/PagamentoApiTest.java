@@ -5,7 +5,6 @@ import com.avalanches.enterprisebusinessrules.entities.StatusPagamento;
 import com.avalanches.frameworksanddrivers.api.dto.WebhookParams;
 import com.avalanches.frameworksanddrivers.api.dto.WebHookMockParams;
 import com.avalanches.frameworksanddrivers.databases.config.BancoDeDadosContexto;
-import com.avalanches.frameworksanddrivers.databases.interfaces.BancoDeDadosContextoInterface;
 import com.avalanches.interfaceadapters.controllers.PagamentoController;
 import com.avalanches.interfaceadapters.presenters.dtos.WebHookDto;
 import org.junit.jupiter.api.BeforeEach;

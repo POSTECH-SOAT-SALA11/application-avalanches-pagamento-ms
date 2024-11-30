@@ -29,7 +29,7 @@ public class PagamentoUseCase implements PagamentoUseCaseInterface {
     }
 
     private static Pagamento montarPagamento(WebhookParams webhook) {
-        return new Pagamento(1, webhook.idPedido(), webhook.status());
+        return new Pagamento(webhook.idPedido(), webhook.status());
     }
 
 }
