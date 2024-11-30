@@ -42,7 +42,6 @@ class PagamentoApiTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(expectedResponse.mensagem(), response.getBody().mensagem());
 
-        // Verify that the controller's webhook method was called
         verify(pagamentoController).webhook(webhookParams);
     }
 
@@ -61,7 +60,6 @@ class PagamentoApiTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
         assertEquals(expectedResponse.mensagem(), response.getBody().mensagem());
 
-        // Verify that the controller's webhook method was called
         verify(pagamentoController).webhook(webhookParams);
     }
 
@@ -79,7 +77,6 @@ class PagamentoApiTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(expectedStatus, response.getBody());
 
-        // Verify that the controller's consultaStatus method was called
         verify(pagamentoController).consultaStatus(123);
     }
 
@@ -97,7 +94,6 @@ class PagamentoApiTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertTrue(response.getBody());
 
-        // Verify that the controller's efetuarPagamento method was called
         verify(pagamentoController).efetuarPagamento(123);
     }
 }

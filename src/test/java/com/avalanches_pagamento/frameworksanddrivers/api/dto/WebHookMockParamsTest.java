@@ -12,7 +12,6 @@ class WebHookMockParamsTest {
 
     @BeforeEach
     void setUp() {
-        // Mock or create an instance of OkHttpClient
         mockHttpClient = new OkHttpClient();
     }
 

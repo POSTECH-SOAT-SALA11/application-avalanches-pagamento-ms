@@ -8,66 +8,66 @@ class WebHookDtoTest {
 
     @Test
     void testConstructorAndGetters() {
-        // Arrange: Create an instance of WebHookDto
+        // Arrange
         boolean sucesso = true;
         String mensagem = "Success";
 
         WebHookDto dto = new WebHookDto(sucesso, mensagem);
 
-        // Act & Assert: Verify that the fields are correctly set
+        // Act & Assert
         assertEquals(sucesso, dto.sucesso());
         assertEquals(mensagem, dto.mensagem());
     }
 
     @Test
     void testEquality() {
-        // Arrange: Create two instances of WebHookDto with the same data
+        // Arrange
         WebHookDto dto1 = new WebHookDto(true, "Success");
         WebHookDto dto2 = new WebHookDto(true, "Success");
 
-        // Act & Assert: Verify that the two instances are considered equal
+        // Act & Assert
         assertEquals(dto1, dto2);
     }
 
     @Test
     void testEqualityWithDifferentData() {
-        // Arrange: Create two instances of WebHookDto with different data
+        // Arrange
         WebHookDto dto1 = new WebHookDto(true, "Success");
         WebHookDto dto2 = new WebHookDto(false, "Failure");
 
-        // Act & Assert: Verify that the two instances are not considered equal
+        // Act & Assert
         assertNotEquals(dto1, dto2);
     }
 
     @Test
     void testHashCode() {
-        // Arrange: Create two instances of WebHookDto with the same data
+        // Arrange
         WebHookDto dto1 = new WebHookDto(true, "Success");
         WebHookDto dto2 = new WebHookDto(true, "Success");
 
-        // Act & Assert: Verify that instances with the same data have the same hashCode
+        // Act & Assert
         assertEquals(dto1.hashCode(), dto2.hashCode());
     }
 
     @Test
     void testHashCodeWithDifferentData() {
-        // Arrange: Create two instances of WebHookDto with different data
+        // Arrange
         WebHookDto dto1 = new WebHookDto(true, "Success");
         WebHookDto dto2 = new WebHookDto(false, "Failure");
 
-        // Act & Assert: Verify that instances with different data have different hashCodes
+        // Act & Assert
         assertNotEquals(dto1.hashCode(), dto2.hashCode());
     }
 
     @Test
     void testToString() {
-        // Arrange: Create an instance of WebHookDto
+        // Arrange
         WebHookDto dto = new WebHookDto(true, "Success");
 
-        // Act: Get the string representation of the instance
+        // Act
         String expectedToString = "WebHookDto[sucesso=true, mensagem=Success]";
 
-        // Assert: Verify that the toString method returns the expected string
+        // Assert
         assertEquals(expectedToString, dto.toString());
     }
 }

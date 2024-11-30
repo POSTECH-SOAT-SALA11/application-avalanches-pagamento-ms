@@ -19,20 +19,17 @@ class BancoDeDadosContextoTest {
 
     @BeforeEach
     void setUp() {
-        // Initialize mocks
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
     void testConstructorAndGetRedisCommands() {
-        // Verify that the constructor correctly initializes the redisCommands field
         assertNotNull(bancoDeDadosContexto);
         assertEquals(redisCommandsMock, bancoDeDadosContexto.getRedisCommands());
     }
 
     @Test
     void testGetRedisCommands() {
-        // Verify that getRedisCommands() returns the mocked RedisCommands instance
         RedisCommands<String, String> result = bancoDeDadosContexto.getRedisCommands();
         assertEquals(redisCommandsMock, result);
     }

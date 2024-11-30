@@ -18,7 +18,6 @@ class WebhookParamsTest {
 
     @BeforeEach
     void setUp() {
-        // Create a ValidatorFactory and Validator instance for validation
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }

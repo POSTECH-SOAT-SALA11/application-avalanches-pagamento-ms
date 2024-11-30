@@ -10,7 +10,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(classes = JsonSerializerConfig.class)  // Explicitly provide the config class here
+@SpringBootTest(classes = JsonSerializerConfig.class)
 class JsonSerializerConfigTest {
 
     @Autowired
@@ -18,17 +18,14 @@ class JsonSerializerConfigTest {
 
     @Test
     void testObjectMapperIsNotNull() {
-        // Assert that the ObjectMapper bean is not null
         assertNotNull(objectMapper, "ObjectMapper bean should be present in the application context.");
     }
 
     @Test
     void testJavaTimeModuleIsRegistered() {
-        // Check if JavaTimeModule is registered by default for ObjectMapper
         Set<Object> registeredModules =  objectMapper.getRegisteredModuleIds();
         boolean isJavaTimeModulePresent = registeredModules.contains(new JavaTimeModule().getTypeId());
 
-        // Assert that the JavaTimeModule is registered
         assertTrue(isJavaTimeModulePresent, "JavaTimeModule should be registered with ObjectMapper.");
     }
 }

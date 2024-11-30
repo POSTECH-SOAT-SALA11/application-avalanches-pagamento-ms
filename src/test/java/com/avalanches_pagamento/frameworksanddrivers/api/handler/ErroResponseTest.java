@@ -14,7 +14,6 @@ class ErroResponseTest {
 
     @BeforeEach
     void setUp() {
-        // Initialize the object before each test
         LocalDateTime timestamp = LocalDateTime.now();
         erroResponse = new ErroResponse(400, "Bad Request", timestamp);
     }

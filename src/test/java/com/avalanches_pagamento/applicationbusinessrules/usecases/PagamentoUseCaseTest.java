@@ -17,13 +17,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class PagamentoUseCaseTest {
 
     @Mock
-    private PagamentoGatewayInterface pagamentoGateway;  // Mock the PagamentoGateway
+    private PagamentoGatewayInterface pagamentoGateway;
 
     @Mock
-    private WebhookParams webhook;  // Mock the WebhookParams
+    private WebhookParams webhook;
 
     @InjectMocks
-    private PagamentoUseCase pagamentoUseCase;  // The class under test
+    private PagamentoUseCase pagamentoUseCase;
 
     @BeforeEach
     void setUp() {
@@ -43,7 +43,6 @@ class PagamentoUseCaseTest {
         pagamentoUseCase.cadastrar(webhook, pagamentoGateway);
 
         // Assert
-        // Verifying that the cadastrar method of the gateway is called with the right parameters
         verify(pagamentoGateway).cadastrar(any());
     }
 

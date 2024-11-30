@@ -55,13 +55,12 @@ class PagamentoGatewayTest {
         // Act
         pagamentoGateway.cadastrar(pagamento);
 
-        // Capture the Redis key and value passed to hset
         ArgumentCaptor<String> keyCaptor = ArgumentCaptor.forClass(String.class);
         ArgumentCaptor<String> fieldCaptor = ArgumentCaptor.forClass(String.class);
         ArgumentCaptor<String> valueCaptor = ArgumentCaptor.forClass(String.class);
         verify(redisCommands).hset(keyCaptor.capture(), fieldCaptor.capture(), valueCaptor.capture());
 
-        // Assert: Verify that the key and value are correct
+        // Assert
         assertEquals("pagamento:1", keyCaptor.getValue());
         assertEquals("status", fieldCaptor.getValue());
         assertEquals("APROVADO", valueCaptor.getValue());
@@ -72,21 +71,16 @@ class PagamentoGatewayTest {
         // Arrange
         Integer idPedido = 1;
 
-        // Mock the HttpClient, Call, and Response
         OkHttpClient mockHttpClient = mock(OkHttpClient.class);
         Call mockCall = mock(Call.class);
         Response mockResponse = mock(Response.class);
 
-        // Mock newCall() to return the mock Call
         when(mockHttpClient.newCall(any(Request.class))).thenReturn(mockCall);
 
-        // Mock execute() to return the mock Response
         when(mockCall.execute()).thenReturn(mockResponse);
 
-        // Mock isSuccessful() to return true for a successful request
         when(mockResponse.isSuccessful()).thenReturn(true);
 
-        // Pass the mockHttpClient to the PagamentoGateway constructor
         WebHookMockParams mockWebHookMockParams = new WebHookMockParams("http://example.com/", mockHttpClient);
         PagamentoGateway pagamentoGateway = new PagamentoGateway(mock(BancoDeDadosContextoInterface.class), mockWebHookMockParams);
 
@@ -94,10 +88,10 @@ class PagamentoGatewayTest {
         Boolean result = pagamentoGateway.efetuarPagamento(idPedido);
 
         // Assert
-        assertTrue(result);  // Since we mock isSuccessful() to return true
-        verify(mockHttpClient).newCall(any(Request.class));  // Verify that newCall() was called
+        assertTrue(result);
+        verify(mockHttpClient).newCall(any(Request.class));
         try {
-            verify(mockCall).execute();  // Verify that execute() was called on the mock Call object
+            verify(mockCall).execute();
         } catch (IOException e) {
             fail(e.getMessage());
         }
@@ -109,13 +103,10 @@ class PagamentoGatewayTest {
         // Arrange
         Integer idPedido = 1;
 
-        // Mock the Call object
         Call mockCall = mock(Call.class);
 
-        // Mock the HTTP client to return the mock Call
         when(httpClient.newCall(any(Request.class))).thenReturn(mockCall);
 
-        // Mock the execute method to throw an exception
         try {
             when(mockCall.execute()).thenThrow(new IOException("Request failed"));
         } catch (IOException e) {
@@ -126,10 +117,10 @@ class PagamentoGatewayTest {
         Boolean result = pagamentoGateway.efetuarPagamento(idPedido);
 
         // Assert
-        assertFalse(result);  // We expect false because the request failed
-        verify(httpClient).newCall(any(Request.class));  // Verify that newCall() was called
+        assertFalse(result);
+        verify(httpClient).newCall(any(Request.class));
         try {
-            verify(mockCall).execute();  // Verify that execute() was called on the mock Call object
+            verify(mockCall).execute();
         } catch (IOException e) {
             fail(e.getMessage());
         }

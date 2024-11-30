@@ -19,21 +19,20 @@ import static org.junit.jupiter.api.Assertions.*;
 class PagamentoControllerTest {
 
     @Mock
-    private PagamentoGatewayInterface pagamentoGateway; // Mock PagamentoGateway
+    private PagamentoGatewayInterface pagamentoGateway;
 
     @Mock
-    private PagamentoUseCaseInterface pagamentoUseCase; // Mock PagamentoUseCase
+    private PagamentoUseCaseInterface pagamentoUseCase;
 
     @InjectMocks
-    private PagamentoController pagamentoController; // Controller under test
+    private PagamentoController pagamentoController;
 
-    private WebhookParams webhookParams; // Test data for WebhookParams
+    private WebhookParams webhookParams;
 
-    private Integer idPedido; // Test ID for pedido
+    private Integer idPedido;
 
     @BeforeEach
     void setUp() {
-        // Initialize test data
         idPedido = 123;
         webhookParams = new WebhookParams(idPedido, StatusPagamento.APROVADO);
     }

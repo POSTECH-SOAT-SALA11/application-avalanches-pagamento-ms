@@ -17,25 +17,23 @@ class JsonPresenterTest {
 
     @BeforeEach
     void setUp() {
-        // Mock the ObjectMapper
         objectMapper = Mockito.mock(ObjectMapper.class);
         jsonPresenter = new JsonPresenter(objectMapper);
     }
 
     @Test
     void testSerialize() throws JsonProcessingCustomException {
-        // Arrange: Create a sample object
+        // Arrange
         String expectedJson = "{\"name\":\"John\",\"age\":30}";
         Person person = new Person("John", 30);
 
-        // Mock ObjectMapper behavior
         try {
             when(objectMapper.writeValueAsString(person)).thenReturn(expectedJson);
 
-            // Act: Call serialize method
+            // Act
             String json = jsonPresenter.serialize(person);
 
-            // Assert: Verify that the serialized JSON is correct
+            // Assert
             assertEquals(expectedJson, json);
         } catch (JsonProcessingException e) {
             fail("Exception should not be thrown here");
@@ -44,18 +42,17 @@ class JsonPresenterTest {
 
     @Test
     void testDeserialize() throws JsonProcessingCustomException {
-        // Arrange: Prepare a JSON string
+        // Arrange
         String json = "{\"name\":\"John\",\"age\":30}";
         Person expectedPerson = new Person("John", 30);
 
-        // Mock ObjectMapper behavior
         try {
             when(objectMapper.readValue(json, Person.class)).thenReturn(expectedPerson);
 
-            // Act: Call deserialize method
+            // Act
             Person person = jsonPresenter.deserialize(json, Person.class);
 
-            // Assert: Verify that the deserialized object matches the expected one
+            // Assert
             assertEquals(expectedPerson, person);
         } catch (JsonProcessingException e) {
             fail("Exception should not be thrown here");
@@ -64,14 +61,13 @@ class JsonPresenterTest {
 
     @Test
     void testSerializeWithJsonProcessingException() {
-        // Arrange: Create a sample object
+        // Arrange
         Person person = new Person("John", 30);
 
-        // Mock ObjectMapper behavior to throw JsonProcessingException
         try {
             when(objectMapper.writeValueAsString(person)).thenThrow(JsonProcessingException.class);
 
-            // Act & Assert: Expect JsonProcessingCustomException to be thrown
+            // Act & Assert
             JsonProcessingCustomException exception = assertThrows(JsonProcessingCustomException.class, () -> {
                 jsonPresenter.serialize(person);
             });
@@ -84,14 +80,13 @@ class JsonPresenterTest {
 
     @Test
     void testDeserializeWithJsonProcessingException() {
-        // Arrange: Prepare a JSON string
+        // Arrange
         String json = "{\"name\":\"John\",\"age\":30}";
 
-        // Mock ObjectMapper behavior to throw JsonProcessingException
         try {
             when(objectMapper.readValue(json, Person.class)).thenThrow(JsonProcessingException.class);
 
-            // Act & Assert: Expect JsonProcessingCustomException to be thrown
+            // Act & Assert
             JsonProcessingCustomException exception = assertThrows(JsonProcessingCustomException.class, () -> {
                 jsonPresenter.deserialize(json, Person.class);
             });
@@ -104,8 +99,8 @@ class JsonPresenterTest {
 
     @Test
     void testDeserializeWithInvalidJson() {
-        // Arrange: Prepare an invalid JSON string
-        String invalidJson = "{\"name\":\"John\",\"age\":\"invalid\"}";  // age should be an integer
+        // Arrange
+        String invalidJson = "{\"name\":\"John\",\"age\":\"invalid\"}";
 
         try {
             when(objectMapper.readValue(invalidJson, Person.class)).thenCallRealMethod();
@@ -113,7 +108,7 @@ class JsonPresenterTest {
             fail("Unexpected exception during mock setup");
         }
 
-        // Act & Assert: Expect JsonProcessingCustomException to be thrown when deserialization fails
+        // Act & Assert
         JsonProcessingCustomException exception = assertThrows(JsonProcessingCustomException.class, () -> {
             jsonPresenter.deserialize(invalidJson, Person.class);
         });
@@ -121,7 +116,6 @@ class JsonPresenterTest {
         assertNotNull(exception.getMessage());
     }
 
-    // Sample Person class for testing
     private static class Person {
         private String name;
         private int age;
