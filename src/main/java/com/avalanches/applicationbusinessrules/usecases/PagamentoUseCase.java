@@ -16,7 +16,7 @@ public class PagamentoUseCase implements PagamentoUseCaseInterface {
     }
 
     @Override
-    public boolean efetuarPagamento(Integer idPedido, PagamentoGatewayInterface pagamentoGateway) {
+    public Boolean efetuarPagamento(Integer idPedido, PagamentoGatewayInterface pagamentoGateway) {
         return pagamentoGateway.efetuarPagamento(idPedido);
     }
 

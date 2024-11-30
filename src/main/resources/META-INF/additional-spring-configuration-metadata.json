@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "pagamento.webhook.url",
+      "type": "java.lang.String",
+      "description": "Description for pagamento.webhook.url."
+    }
+  ]
+}

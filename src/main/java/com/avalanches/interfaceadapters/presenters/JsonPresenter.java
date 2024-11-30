@@ -13,8 +13,14 @@ public class JsonPresenter implements JsonPresenterInterface {
     private final ObjectMapper objectMapper;
 
     public JsonPresenter() {
-        this.objectMapper = new ObjectMapper();
-        this.objectMapper.registerModule(new JavaTimeModule());
+        this.objectMapper = createObjectMapper();
+    }
+
+    protected ObjectMapper createObjectMapper() {
+        final ObjectMapper objectMapper;
+        objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        return objectMapper;
     }
 
     @Override

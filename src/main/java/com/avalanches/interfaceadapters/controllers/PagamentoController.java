@@ -25,6 +25,13 @@ public class PagamentoController implements PagamentoControllerInterface {
         return pagamentoUseCase.consultaStatus(idPedido, pagamentoGateway);
     }
 
+    @Override
+    public Boolean efetuarPagamento(Integer idPedido, BancoDeDadosContextoInterface bancoDeDadosContexto, WebHookMockParams webHookMockParams) {
+        PagamentoGatewayInterface pagamentoGateway = createPagamentoGateway(bancoDeDadosContexto, webHookMockParams);
+        PagamentoUseCase pagamentoUseCase = createPagamentoUseCase();
+        return pagamentoUseCase.efetuarPagamento(idPedido, pagamentoGateway);
+    }
+
     protected PagamentoGateway createPagamentoGateway(
             BancoDeDadosContextoInterface bancoDeDadosContexto,
             WebHookMockParams webHookMockParams

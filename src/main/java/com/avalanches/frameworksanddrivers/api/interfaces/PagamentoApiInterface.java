@@ -19,4 +19,8 @@ public interface PagamentoApiInterface {
                description = "Endpoint utilizado para consultar o status do pagamento")
     ResponseEntity<StatusPagamento> consultaStatus(@PathVariable("idPedido") Integer idPedido);
 
+    @Operation(summary = "Efetuar pagamento",
+            description = "Endpoint utilizado para efetuar o pagamento do pedido")
+    ResponseEntity<Boolean> efetuarPagamento(@PathVariable("idPedido") Integer idPedido);
+
 }

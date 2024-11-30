@@ -12,4 +12,6 @@ public interface PagamentoControllerInterface {
 
     StatusPagamento consultaStatus(Integer idPedido, BancoDeDadosContextoInterface bancoDeDadosContexto, WebHookMockParams webHookMockParams);
 
+    Boolean efetuarPagamento(Integer idPedido, BancoDeDadosContextoInterface bancoDeDadosContexto, WebHookMockParams webHookMockParams);
+
 }

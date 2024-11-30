@@ -54,4 +54,13 @@ public class PagamentoApi implements PagamentoApiInterface {
         return ResponseEntity.ok().body(response);
     }
 
+    @GetMapping("/efetuar-pagamento/{idPedido}")
+    @Override
+    public ResponseEntity<Boolean> efetuarPagamento(@PathVariable("idPedido") Integer idPedido) {
+        PagamentoControllerInterface pagamentoController = new PagamentoController();
+        WebHookMockParams webHookMockParams = new WebHookMockParams();
+        Boolean response = pagamentoController.efetuarPagamento(idPedido, bancoDeDadosContexto, webHookMockParams);
+        return ResponseEntity.ok().body(response);
+    }
+
 }
