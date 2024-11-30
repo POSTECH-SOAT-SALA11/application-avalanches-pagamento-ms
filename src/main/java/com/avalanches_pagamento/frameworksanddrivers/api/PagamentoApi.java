@@ -30,7 +30,6 @@ public class PagamentoApi implements PagamentoApiInterface {
             pagamentoController.webhook(webhook);
             return ResponseEntity.ok(new WebHookDto(true, "Webhook recebido com sucesso"));
         } catch (Exception e) {
-            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new WebHookDto(false, "Ocorreu um erro ao processar o webhook"));
         }
