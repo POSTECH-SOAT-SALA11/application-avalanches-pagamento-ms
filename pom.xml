@@ -124,6 +124,7 @@
                 <version>0.8.10</version>
                 <configuration>
                     <excludes>
+                        <exclude>com/avalanches_pagamento/frameworksanddrivers/api/AvalanchesApplication.java</exclude>
                     </excludes>
                 </configuration>
                 <executions>
