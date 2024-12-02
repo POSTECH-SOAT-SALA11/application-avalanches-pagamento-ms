@@ -25,7 +25,6 @@ services:
       PAGAMENTO_WEBHOOK_HOST: pagamento-mock-service
       PAGAMENTO_WEBHOOK_PORT: 5001
       PAGAMENTO_WEBHOOK_ENDPOINT: pagamento
-      PAGAMENTO_WEBHOOK_URL_2: http://sistema-pagamentos-mock-service:5001/pagamento/
     ports:
       - "8282:8282"
     depends_on:
