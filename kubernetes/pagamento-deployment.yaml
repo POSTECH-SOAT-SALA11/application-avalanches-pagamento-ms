@@ -40,3 +40,9 @@ spec:
                 secretKeyRef:
                   name: pagamento-dbcredentials
                   key: redis_password
+            - name: PAGAMENTO_WEBHOOK_HOST
+              value: "k8s-default-ingressa-0faf251d7e-890170821.sa-east-1.elb.amazonaws.com" 
+            - name: PAGAMENTO_WEBHOOK_PORT
+              value: "5001"     
+            - name: PAGAMENTO_WEBHOOK_ENDPOINT
+              value: "pagamento" 
