@@ -69,6 +69,11 @@ Para executar o projeto em Kubernetes, siga estas etapas:
    http://localhost:8282/swagger-ui/index.html#/
    ```
 
+## Evidencia de cobertura dos testes unitarios
+![image](https://github.com/user-attachments/assets/eb1326ef-d9b3-47bf-ad0a-13cfce13eac1)
+
+
+
 ## Autores
 
 - [Hennan Cesar Alves Gadelha de Freitas](https://github.com/HennanGadelha)
