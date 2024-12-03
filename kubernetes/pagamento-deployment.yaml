@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pagamento-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pagamento
+  template:
+    metadata:
+      labels:
+        app: pagamento
+    spec:
+      containers:
+        - name: pagamento
+          image: 307946636040.dkr.ecr.sa-east-1.amazonaws.com/ms-pagamento:latest
+          ports:
+            - containerPort: 8082
+          resources:
+            requests:
+              cpu: "300m"
+              memory: "256Mi"
+            limits:
+              cpu: "1000m"
+              memory: "512Mi"
+          # Adição de variáveis de ambiente
+          env:
+            - name: DATABASE_DIALECT
+              value: "postgres"
+            - name: POSTGRES_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: pagamento-dbcredentials
+                  key: host
+            - name: POSTGRES_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: pagamento-dbcredentials
+                  key: port
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: pagamento-dbcredentials
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pagamento-dbcredentials
+                  key: password
+            - name: POSTGRES_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: pagamento-dbcredentials
+                  key: db
+            - name: TYPEORM_CONNECTION
+              value: "postgres"
+            - name: TYPEORM_URL
+              valueFrom:
+                secretKeyRef:
+                  name: pagamento-dbcredentials
+                  key: typeorm
+            - name: REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: pagamento-dbcredentials
+                  key: redis_host
+            - name: REDIS_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: pagamento-dbcredentials
+                  key: redis_port
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pagamento-dbcredentials
+                  key: redis_password
