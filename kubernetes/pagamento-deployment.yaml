@@ -24,42 +24,7 @@ spec:
             limits:
               cpu: "1000m"
               memory: "512Mi"
-          # Adição de variáveis de ambiente
           env:
-            - name: DATABASE_DIALECT
-              value: "postgres"
-            - name: POSTGRES_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: pagamento-dbcredentials
-                  key: host
-            - name: POSTGRES_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: pagamento-dbcredentials
-                  key: port
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: pagamento-dbcredentials
-                  key: username
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: pagamento-dbcredentials
-                  key: password
-            - name: POSTGRES_DATABASE
-              valueFrom:
-                secretKeyRef:
-                  name: pagamento-dbcredentials
-                  key: db
-            - name: TYPEORM_CONNECTION
-              value: "postgres"
-            - name: TYPEORM_URL
-              valueFrom:
-                secretKeyRef:
-                  name: pagamento-dbcredentials
-                  key: typeorm
             - name: REDIS_HOST
               valueFrom:
                 secretKeyRef:
