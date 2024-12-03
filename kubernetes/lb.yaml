@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: pedido-app-loadbalancer
+  name: pagamento-app-loadbalancer
   labels:
-    app: pedido
+    app: pagamento
 spec:
   type: LoadBalancer
   ports:
     - port: 82         # Porta externa
       targetPort: 8082    # Porta onde sua aplicação está rodando
   selector:
-    app: pedido
+    app: pagamento
