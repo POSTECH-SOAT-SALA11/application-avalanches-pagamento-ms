@@ -3,7 +3,7 @@
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=POSTECH-SOAT-SALA11_application-avalanches-pagamento-ms&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=POSTECH-SOAT-SALA11_application-avalanches-pagamento-ms)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=POSTECH-SOAT-SALA11_application-avalanches-pagamento-ms&metric=coverage)](https://sonarcloud.io/summary/new_code?id=POSTECH-SOAT-SALA11_application-avalanches-pagamento-ms)
 
-
+# Microsserviço de Pagamento
 ## Funcionalidades Principais 
 
 ### Internas
@@ -21,10 +21,10 @@
 - Amazon Elastic Kubernetes Service (EKS)
 
 ## Arquitetura AWS(Cloud)
-[Ilustração na Wiki](https://github.com/POSTECH-SOAT-SALA11/application-avalanches-aws/wiki/Arquitetura-AWS)
+[Ilustração na Wiki](https://github.com/POSTECH-SOAT-SALA11/application-avalanches-pagamento-ms/wiki/Arquitetura-AWS)
 
 ## Esteiras CI/CD
-[Ilustração na Wiki](https://github.com/POSTECH-SOAT-SALA11/application-avalanches-aws/wiki/Esteiras-CI-CD)
+[Ilustração na Wiki](https://github.com/POSTECH-SOAT-SALA11/application-avalanches-pagamento-ms/wiki/Esteiras-CI-CD)
 
 ## Banco de dados
 - Redis: Serve como cache de alta performance, armazenando dados temporários e reduzindo a carga no PostgreSQL. Ele oferece respostas rápidas para consultas frequentes, como o status dos pedidos.
@@ -42,13 +42,10 @@ e os adaptadores que ajudam a camada de apresentação a exibir resultados.
 
 - **Enterprise Business Rules**:  Representa a camada de entidades e suas regras de negócio.
 
-Desenho da arquitetura: https://github.com/POSTECH-SOAT-SALA11/Avalanches/wiki/Desenho-da-arquitetura
-
 ## Execução do Projeto em Kubernetes
 
 ### Requisitos tecnológicos:
 - **[Docker](https://www.docker.com/)**: para a criação de imagens de contêineres.
-- **[Minikube](https://minikube.sigs.k8s.io/docs/start/?arch=%2Fwindows%2Fx86-64%2Fstable%2F.exe+download)**: para a execução de um cluster Kubernetes local.
 
 Para executar o projeto em Kubernetes, siga estas etapas:
 
