@@ -6,7 +6,7 @@ spec:
   selector:
     app: pagamento
   ports:
-    - port: 8082
-      targetPort: 8282
+    - port: 8082     # Porta que o Ingress está usando para o tráfego externo
+      targetPort: 8082  # Porta onde a aplicação está ouvindo no container
       protocol: TCP
   type: NodePort

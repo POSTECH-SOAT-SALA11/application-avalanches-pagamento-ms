@@ -71,7 +71,7 @@ Para executar o projeto em Kubernetes, siga estas etapas:
 
 4. Acesse o Swagger da aplicação em:
    ```
-   http://localhost:8282/swagger-ui/index.html#/
+   http://localhost:8082/swagger-ui/index.html#/
    ```
 
 ## Evidencia de cobertura dos testes unitarios

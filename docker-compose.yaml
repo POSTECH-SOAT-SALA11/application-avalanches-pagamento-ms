@@ -26,7 +26,7 @@ services:
       PAGAMENTO_WEBHOOK_PORT: 5001
       PAGAMENTO_WEBHOOK_ENDPOINT: pagamento
     ports:
-      - "8282:8282"
+      - "8082:8082"
     depends_on:
       - redis
     networks:
