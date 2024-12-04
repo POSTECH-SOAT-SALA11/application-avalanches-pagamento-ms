@@ -5,8 +5,8 @@ metadata:
 spec:
   selector:
     app: pagamento
-  type: NodePort
   ports:
     - port: 8082
-      targetPort: 8082
-      nodePort: 30002
+      targetPort: 8282
+      protocol: TCP
+  type: NodePort
