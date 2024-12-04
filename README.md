@@ -9,6 +9,10 @@
 ### Internas
 - **Integração de pagamento**: Integração com API de pagamentos(mock webhook).
 - **Status de pagamento**: Acompanhe o status dos pagamentos.
+  
+# Vídeos
+- https://youtu.be/UQ2DW_Y6RvI
+- https://youtu.be/V53hE-nBjzk
 
 ## Tecnologias Utilizadas
 
